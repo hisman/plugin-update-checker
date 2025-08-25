@@ -16,12 +16,13 @@ if ( !class_exists(Update::class, false) ):
 		public $version;
 		public $download_url;
 		public $translations = array();
+		public $auto_update_forced;
 
 		/**
 		 * @return string[]
 		 */
 		protected function getFieldNames() {
-			return array('slug', 'version', 'download_url', 'translations');
+			return array('slug', 'version', 'download_url', 'translations', 'auto_update_forced');
 		}
 
 		public function toWpFormat() {
@@ -30,6 +31,7 @@ if ( !class_exists(Update::class, false) ):
 			$update->slug = $this->slug;
 			$update->new_version = $this->version;
 			$update->package = $this->download_url;
+			$update->{'auto-update-forced'} = $this->auto_update_forced;
 
 			return $update;
 		}
